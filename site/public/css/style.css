@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nosifer&family=Roboto&display=swap');
+@font-face{
+    font-family: Docallisme On Street;
+    src: url(../assets/marsneveneksk/MARSNEVENEKSK-Clean.otf);
+}
 
 *{
     margin: 0;
@@ -34,6 +38,7 @@
 .header img{
     height: 8vh;
 }
+
 .imagemHome{
     display: flex;
     height: 100%;
@@ -41,20 +46,25 @@
     align-items: center;
     justify-content: center;
 }
+
 .imagemHome img{
     width: 100vw;
     height: 600px;
     object-fit: cover;
 }
+
 .textoHome{
-    position: absolute;
     display: flex;
+    position: absolute;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
+
 .textoHome p{
-    font-size: large;
-    color: white;
-    
+    font-family: 'Docallisme On Street';
+
+    font-size: 150px;
+    color: #740000;
+    text-shadow: 1.5px 1.5px 1.5px #ffffff;
 }
