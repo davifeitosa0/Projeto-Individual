@@ -11,7 +11,6 @@
 
 *{
     margin: 0;
-    
 }
 
 html{
@@ -19,6 +18,8 @@ html{
 }
 
 body{
+
+    overflow-x: hidden;
     background-color: #060806;
     margin-top: 10vh;
 }
@@ -36,7 +37,7 @@ body{
     
     animation: scroll linear forwards;
     animation-timeline: scroll();
-    animation-range: 0vh 20vh;
+    animation-range: 0vh 60vh;
 
     & .container{
         justify-content: space-between;
@@ -48,7 +49,10 @@ body{
     display: flex;
     width: 85%;
     margin: auto;
-    
+
+    & img{
+        height: 25.5vw;
+    }
 }
 
 .header ul{
@@ -58,7 +62,7 @@ body{
     padding: 0;
     list-style-type: none;
     display: flex;
-    width: 50%;
+    width: 58%;
     justify-content: space-between;
 }
 
@@ -103,17 +107,23 @@ body{
 }
 
 
-.sobre{
+.titulo{
     display: flex;
     width: 100%;
     justify-content: center;
     margin-top: 20vh; 
 }
 
-.sobre p{
+.titulo p{
     color: #9fa3a9;
     font-family: bombing;
     font-size: 135px;
+    
+    animation-name: aparecer;
+    animation: aparecer linear both;
+    animation-timeline: view(block);
+    animation-range: cover 10% cover 50%;
+      
 }
    
 .subtitle{
@@ -121,19 +131,37 @@ body{
     color: #9fa3a9;
     font-size: 45px;
     font-weight: 600;
+
+    
 }
-.OQueE{
+
+.caixas{
     margin-top: 70px;
     display: flex;
     justify-content: space-evenly;
-    
-    & img{
-        height: 25.5vw;
-    }
 }
-.textosEsquerda{
+
+.textos{
     width: 40%;
 }
+
+.vindoEsquerda{
+    animation: esquerda linear both;
+    animation-timeline: view();
+    animation-range: cover -10% cover 20%;
+}
+
+.vindoDireita{
+    text-align: right;
+    animation: direita linear both;
+    animation-timeline: view();
+    animation-range: cover -10% cover 20%;
+}
+
+.espacamento{
+    margin-top: 250px;
+}
+
 .normalText{
     margin-top: 15px;
     color: white;
@@ -153,7 +181,36 @@ body{
         background-color: #0000005d;
         height: 10vh;
         font-size: 2em;
+    }   
+}
+
+@keyframes aparecer{
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
     }
-    
-    
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes esquerda{
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+@keyframes direita{
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
