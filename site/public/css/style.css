@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nosifer&family=Roboto&display=swap');
+
 @font-face{
     font-family: MARSNEVENEKSK;
     src: url(../assets/marsneveneksk/MARSNEVENEKSK-Clean.otf);
@@ -31,7 +32,6 @@ body{
     display: flex;
     position: fixed;
     top: 0;
-    left: 0;
     z-index: 999;
     box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.5);
     
@@ -103,7 +103,6 @@ body{
         color: #740000;
         text-shadow: 1.5px 1.5px 1.5px #ffffff;
     }
-    
 }
 
 
@@ -111,28 +110,21 @@ body{
     display: flex;
     width: 100%;
     justify-content: center;
-    margin-top: 20vh; 
+    margin-top: 15vh; 
 }
 
 .titulo p{
     color: #9fa3a9;
     font-family: bombing;
     font-size: 135px;
-    
-    animation-name: aparecer;
-    animation: aparecer linear both;
-    animation-timeline: view(block);
-    animation-range: cover 10% cover 50%;
-      
 }
+
    
 .subtitle{
     font-family: 'Roboto', sans-serif;
     color: #9fa3a9;
     font-size: 45px;
     font-weight: 600;
-
-    
 }
 
 .caixas{
@@ -145,21 +137,28 @@ body{
     width: 40%;
 }
 
+.espacamento{
+    margin-top: 250px;
+}
+
+.subir{
+    animation-name: aparecer;
+    animation: aparecer linear both;
+    animation-timeline: view(block);
+    animation-range: cover 10% cover 50%;
+}
+
 .vindoEsquerda{
     animation: esquerda linear both;
     animation-timeline: view();
-    animation-range: cover -10% cover 20%;
+    animation-range: cover -10% cover 30%;
 }
 
 .vindoDireita{
     text-align: right;
     animation: direita linear both;
     animation-timeline: view();
-    animation-range: cover -10% cover 20%;
-}
-
-.espacamento{
-    margin-top: 250px;
+    animation-range: cover -10% cover 30%;
 }
 
 .normalText{
