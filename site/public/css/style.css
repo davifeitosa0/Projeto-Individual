@@ -12,6 +12,7 @@
 
 *{
     margin: 0;
+    padding: 0;
 }
 
 html{
@@ -34,7 +35,7 @@ body{
     top: 0;
     z-index: 999;
     box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.5);
-    
+
     animation: scroll linear forwards;
     animation-timeline: scroll();
     animation-range: 0vh 60vh;
@@ -95,7 +96,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
     & p{
         z-index: 1;
         font-family: 'MARSNEVENEKSK';
@@ -110,7 +111,7 @@ body{
     display: flex;
     width: 100%;
     justify-content: center;
-    margin-top: 15vh; 
+    margin-top: 15vh;
 }
 
 .titulo p{
@@ -119,7 +120,7 @@ body{
     font-size: 135px;
 }
 
-   
+
 .subtitle{
     font-family: 'Roboto', sans-serif;
     color: #9fa3a9;
@@ -133,6 +134,12 @@ body{
     justify-content: space-evenly;
 }
 
+.normalText{
+    margin-top: 15px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2vw;
+}
 .textos{
     width: 40%;
 }
@@ -141,8 +148,50 @@ body{
     margin-top: 250px;
 }
 
+.principaisArtistas{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 300px;
+    flex-direction: column;
+}
+
+.carrossel{
+    width: 750px;
+    height: 700px;
+    border-radius: 75px;
+    background-color: #000000;
+    box-shadow: 3px 3px 3px #ffffff2d;
+    overflow: hidden;
+    & ul{
+        margin-top: 50px;
+        display: flex;
+        height: 750px;
+        list-style-type: none;
+    }
+    & li{
+        position: relative;
+        animation: slide 15s infinite ease-out;
+    }
+    & p{
+        margin: auto;
+        margin-top: 20px;
+        width: 700px;
+        text-align: center;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        font-size: 30px;
+    }
+    & img{
+        margin: 0px 187.5px;
+        object-fit: cover;
+        width: 375px;
+        height: 450px;
+    }
+}
+
 .subir{
-    animation-name: aparecer;
     animation: aparecer linear both;
     animation-timeline: view(block);
     animation-range: cover 10% cover 50%;
@@ -161,13 +210,6 @@ body{
     animation-range: cover -10% cover 30%;
 }
 
-.normalText{
-    margin-top: 15px;
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    font-size: 2vw;
-}
-
 
 
 
@@ -180,7 +222,7 @@ body{
         background-color: #0000005d;
         height: 10vh;
         font-size: 2em;
-    }   
+    }
 }
 
 @keyframes aparecer{
@@ -211,5 +253,29 @@ body{
     }
     100% {
         transform: translateX(0);
+    }
+}
+
+@keyframes slide {
+    0%{
+        left: 0px;
+    }
+    20%{
+        left: 0px;
+    }
+    30%{
+        left: -750px;
+    }
+    50%{
+        left: -750px;
+    }
+    60%{
+        left: -1500px;
+    }
+    90%{
+        left: -1500px;     
+    }
+    100%{
+        left: 0px;
     }
 }
