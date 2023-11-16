@@ -4,62 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="css/styleCadastro.css">
+    <link rel="stylesheet" href="css/styleLogin.css">
     <link rel="website icon" type="png" href="assets/RapStudioLogo.png">
     <script src="https://kit.fontawesome.com/0d1baf2431.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <a href="index.html">
-        <div class="homePage">
-            <img src="assets/RapStudioLogo.png" alt=""> Voltar para a home
-        </div>
-    </a>
     <div class="container">
-        <div class="containerFormulario">
-            <p class="titulo">CADASTRO</p>
+        <div id="div_cadastro" class="box">
+            <p class="titulo">Cadastrar</p>
             <div class="inputs">
-                <div class="LabelsInputs">
-                    <label><p>Nome de Usuário: </p>
-                        <input type="text" id="">
-                    </label>
-                    <label><p>Email: </p>
-                        <input type="email" id="">
-                    </label>
-                    <label><p>Senha: </p>
-                        <input type="password" id="">
-                    </label>
-                </div>
-                <div class="LabelsInputs">
-                    <label><p>CEP: </p>
-                        <input type="number" id="">
-                    </label>
-                    <label><p>Cidade: </p>
-                        <input type="text" id="">
-                    </label>
-                    <label><p>Data de Nascimento: </p>
-                    <input type="date" id="diaNasc">
+                <label>
+                    <p>
+                        Nome usuário:
+                    </p>
+                    <input type="text" id="inputNome" placeholder="User_Name">
+                </label>
+                <label>
+                    <p>
+                        E-mail:
+                    </p>
+                    <input type="email" id="inputEmail" placeholder="email@exemplo.com">
+                </label>
+                <label>
+                    <p>
+                        Senha:
+                    </p>
+                    <input type="password" id="inputSenha" placeholder="******************">
                 </label>
             </div>
-        </div>
-        <div class="centerBotao">
-            <button class="botaoCad" onclick="Cadastrar()">
-                Cadastre-se
-            </button>
-            <a href="login.html">
-                <p>
-                    Fazer login
-                </p>
-            </a>
+            <div class="centralizar">
+                <button class="botaoAcao" onclick="alterarTela()">
+                    Continuar
+                </button>
+                <a href="login.html">
+                    <p>Entrar</p>
+                </a>
+                <a href="index.html">
+                    <p>Voltar para a Home</p>
+                </a>
+            </div>
         </div>
     </div>
-</div>
 
 
 </body>
 </html>
 <script>
-    function Cadastrar(){
-        var dataNasc = diaNasc.value;
-        console.log(dataNasc);
+    function alterarTela(){
+        div_cadastro.innerHTML = ` 
+        <p class="titulo">Cadastrar</p>
+            <div class="inputs">
+                <label>
+                    <p>
+                        Data Nascimento
+                    </p>
+                    <input type="date" id="inputData">
+                </label>
+                <label>
+                    <p>
+                        UF:
+                        <select id="selectEstado">
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </p>
+                </label>
+                <label>
+                    <p>
+                        Cidade:
+                    </p>
+                    <input type="text" id="inputCidade" placeholder="Ex: Osasco">
+                </label>
+            </div>
+            <div class="centralizar">
+                <button class="botaoAcao" onclick="Cadastrar()">
+                    Cadastrar-se
+                </button>
+                <a href="login.html">
+                    <p>Entrar</p>
+                </a>
+                <a href="index.html">
+                    <p>Voltar para a Home</p>
+                </a>
+            </div>`
+
     }
 </script>

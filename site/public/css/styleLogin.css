@@ -28,12 +28,12 @@ a{
     justify-content: center;
 }
 
-.tituloLogin{
+.titulo{
     font-family: MARSNEVENEKSK;
     font-size: 80px;
 }
 
-.boxLogin{
+.box{
     width: 28%;
     height: 87%;  /*alterar para 90% a de cadastro tbm*/
     background-color: black; 
@@ -88,7 +88,7 @@ a{
 
 
 
-.botaoLogin{
+.botaoAcao{
     border-radius: 25px;
     border: none; /*colocar isso no cadastro tbm*/
     background-color: #303030;
@@ -106,4 +106,34 @@ a{
         transition: all 0.5s;
         background-color: #740000;
     }
+}
+
+#selectEstado{
+    width: 100%;
+    margin-top: .5rem;
+    display: flex;
+    padding: 0.75rem;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 5px;
+    border: 1px solid #252529;
+    background-color: #17171A;
+    color: #FFF;
+
+    scrollbar-width: none;
+}
+select::-webkit-scrollbar {
+    width: 15px; 
+  } 
+select::-webkit-scrollbar-thumb {
+    background-color: #252529;    
+    border-radius: 20px;       
+    border: 3px solid #17171A;  
+  } 
+select::-webkit-scrollbar-track {
+    background-color: #17171A;    
+  } 
+option:hover {
+    background-color: rgb(255, 255, 255);
 }
