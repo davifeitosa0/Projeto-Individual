@@ -50,9 +50,9 @@ body{
     width: 85%;
     margin: auto;
 
-    & img{
+    /* & img{
         height: 25.5vw;
-    }
+    } */
 }
 
 .header ul{
@@ -88,6 +88,8 @@ body{
 	color:#ffffff;
 	width: 80px;
     height: 40px;
+    transition: all 400ms ease;
+
     &:active {
         position:relative;
         top:1px;
@@ -276,6 +278,8 @@ body{
 	font-size:17px;
 	width: 80px;
     height: 40px;
+    transition: all 400ms ease;
+
     &:active {
         position:relative;
         top:1px;

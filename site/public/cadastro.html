@@ -9,37 +9,57 @@
     <script src="https://kit.fontawesome.com/0d1baf2431.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
-    <div class="containerFormulario">
-        <p class="titulo">CADASTRO</p>
-        <div class="inputs">
-
-            <div class="LabelsInputs">
-                <label><p>Nome de Usuário: </p>
-                    <input type="text" id="">
-                </label>
-                <label><p>Email: </p>
-                    <input type="text" id="">
-                </label>
-                <label><p>Senha: </p>
-                    <input type="text" id="">
-                </label>
-            </div>
-            <div class="LabelsInputs">
-                <label><p>Nome: </p>
-                    <input type="text" id="">
-                </label>
-                <label><p>Nome: </p>
-                    <input type="text" id="">
-                </label>
-                <label><p>Nome: </p>
-                    <input type="text" id="">
+    <a href="index.html">
+        <div class="homePage">
+            <img src="assets/RapStudioLogo.png" alt=""> Voltar para a home
+        </div>
+    </a>
+    <div class="container">
+        <div class="containerFormulario">
+            <p class="titulo">CADASTRO</p>
+            <div class="inputs">
+                <div class="LabelsInputs">
+                    <label><p>Nome de Usuário: </p>
+                        <input type="text" id="">
+                    </label>
+                    <label><p>Email: </p>
+                        <input type="email" id="">
+                    </label>
+                    <label><p>Senha: </p>
+                        <input type="password" id="">
+                    </label>
+                </div>
+                <div class="LabelsInputs">
+                    <label><p>CEP: </p>
+                        <input type="number" id="">
+                    </label>
+                    <label><p>Cidade: </p>
+                        <input type="text" id="">
+                    </label>
+                    <label><p>Data de Nascimento: </p>
+                    <input type="date" id="diaNasc">
                 </label>
             </div>
         </div>
-
+        <div class="centerBotao">
+            <button class="botaoCad" onclick="Cadastrar()">
+                Cadastre-se
+            </button>
+            <a href="login.html">
+                <p>
+                    Fazer login
+                </p>
+            </a>
+        </div>
     </div>
+</div>
 
 
 </body>
 </html>
+<script>
+    function Cadastrar(){
+        var dataNasc = diaNasc.value;
+        console.log(dataNasc);
+    }
+</script>
