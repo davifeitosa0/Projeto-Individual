@@ -7,18 +7,18 @@ idUsuario int primary key auto_increment,
 Nome varchar(45),
 email varchar(255),
 senha varchar(45),
-dtNasc date
-);
-
-create table Endereco(
-idEndereco int,
 UF char(2),
 cidade varchar(45),
-fkUsuario int,
-constraint fkUsuarioEndereco foreign key (fkUsuario) references Usuario(idUsuario)
+dtNasc date
 );
-
-
+select * from usuario;
+CREATE TABLE Recomendacao (
+	idPost int primary key auto_increment,
+	titulo varchar(100),
+	descricao varchar(150),
+	fk_usuario int,
+	constraint idUsuario foreign key (fk_usuario) references usuario(idUsuario)
+);
 
 create user 'userRapStudio'@'localhost' identified by 'Studio123';
 
