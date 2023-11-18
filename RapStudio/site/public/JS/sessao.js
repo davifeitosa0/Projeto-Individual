@@ -20,10 +20,10 @@ function validarSessaoInteracao() {
     // var b_usuario = document.getElementById("b_usuario");
 
     if (email != null && nome != null) {
-        window.location = "../cadastro.html";    
+        window.location = "acerteSom.html";    
     }
     else {
-         window.location = "../login.html";
+         window.location = "login.html";
     }
 }
 
