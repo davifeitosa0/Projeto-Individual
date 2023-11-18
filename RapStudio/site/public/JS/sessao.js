@@ -11,9 +11,6 @@ function validarSessao() {
             
         <li><i class="fa-solid fa-arrow-right-from-bracket" style="cursor: pointer;" onclick="limparSessao()"></i></li> `;
     }
-    //  else {
-    //     window.location = "../login.html";
-    // }
 }
 
 function validarSessaoInteracao() {

@@ -17,6 +17,7 @@
 
 html{
     height: 660vh;
+    scroll-behavior: smooth;
 }
 
 body{
@@ -63,7 +64,7 @@ body{
     list-style-type: none;
     display: flex;
     align-items: center;
-    width: 58%;
+    width: 60%;
     justify-content: space-between;
 }
 
