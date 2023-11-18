@@ -1,5 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
-var aquarioModel = require("../models/aquarioModel");
+// var aquarioModel = require("../models/aquarioModel");
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -20,23 +20,18 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
-                        aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
-                            .then((resultadoAquarios) => {
-                                if (resultadoAquarios.length > 0) {
+                        // aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
+                          
                                     res.json({
-                                        id: resultadoAutenticar[0].id,
-                                        email: resultadoAutenticar[0].email,
+                                        id: resultadoAutenticar[0].idUsuario,
                                         nome: resultadoAutenticar[0].nome,
-                                        senha: resultadoAutenticar[0].senha,
-                                        estado: resultadoAutenticar[0].estado,
-                                        cidade: resultadoAutenticar[0].cidade,
-                                        dataNasc: resultadoAutenticar[0].dataNasc,
-                                        aquarios: resultadoAquarios
-                                    });
-                                } else {
-                                    res.status(204).json({ aquarios: [] });
-                                }
-                            })
+                                        email: resultadoAutenticar[0].email,
+                                        // senha: resultadoAutenticar[0].senha,
+                                        // estado: resultadoAutenticar[0].estado,
+                                        // cidade: resultadoAutenticar[0].cidade,
+                                        // dataNasc: resultadoAutenticar[0].dataNasc
+                                    });           
+                                
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {

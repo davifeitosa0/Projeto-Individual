@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RAP STUDIO</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="../js/sessao.js"></script>
     <link rel="website icon" type="png" href="assets/RapStudioLogo.png">
     <script src="https://kit.fontawesome.com/0d1baf2431.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body onload="validarSessao()">
     <div class="header">
         <div class="container"> 
             <a href="#">
@@ -17,11 +18,13 @@
             <ul>
                 <li> <a href="#localSobre"> Sobre </a></li>
                 <li> <a href="#localPrincipaisArts"> Principais Artistas </a></li>
-                  <li><a href="#localQuiz"> Quiz </a></li>
-                <li><a href="cadastro.html"> Cadastrar </a></li>
-                <div class="btn-entrar">
-                    <li><a href="login.html"> Entrar </a></li>
-                </div>
+                <li> <a href="#localQuiz"> Quiz </a></li>
+                  <span id="b_usuario" style="display: flex; color: white; align-items: center; width: 275px; justify-content: space-around;">
+                        <li><a href="cadastro.html"> Cadastrar </a></li>
+                        <div class="btn-entrar">
+                            <li><a href="login.html"> Entrar </a></li>
+                        </div>
+                    </span>
             </ul>
         </div> <!--container-->
     </div> <!--header-->
@@ -158,7 +161,7 @@
                 <p class="normalText ">Curte RAP? Vem aqui testar seus conhecimentos e se desafiar ao
                     mesmo tempo em que se diverte, com perguntas de diferentes épocas do RAP no Brasil!</p>
                 <div class="alinharBtn">
-                    <button class="botaoQuiz">
+                    <button class="botaoQuiz" onclick="validarSessaoInteracao()">
                         Bora!
                     </button>
                 </div>
