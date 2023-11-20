@@ -6,11 +6,19 @@
     <title>Acerte o som</title>
     <link rel="website icon" type="png" href="assets/RapStudioLogo.png">
     <link rel="stylesheet" href="css/styleQuiz.css">
+    <script src="js/quiz.js"></script>
 </head>
 <body>
     <div class="container">
-        <div class="">
-            
+        <div class="boxQuiz" id="MudarQuestao">
+            <p>Pergunta 1</p>
+            <audio controls="controls" loop="loop" src="assets/Questao1.mp4"></audio>
+            <div class="botoesResposta">
+                <button onclick="respostaE(), cor() " id="q1">Ela Partiu - Tim Maia</button>
+                <button onclick="respostaE(), cor() " id="q2">Um Bom Lugar - Sabotage</button>
+                <button onclick="respostaV(), cor()" id="q3">Um Homem Na Estrada - Racionais MC's</button>
+                <button onclick="respostaE(), cor() " id="q4">Diário De Um Detento - Racionais MC's</button>
+            </div>
         </div>
     </div>
 </body>
