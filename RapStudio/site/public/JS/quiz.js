@@ -115,7 +115,7 @@ function retorno(){
                                 `
     }
     , 1000) 
-    fetch("/usuarios/pontuacaoTeste", {
+    fetch("/resultadoQuiz/pontuacaoTeste", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

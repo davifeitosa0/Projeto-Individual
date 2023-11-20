@@ -48,25 +48,6 @@ function autenticar(req, res) {
 
 }
 
-function pontuacao(req,res){
-    var pontuacaoU = req.body.pontuacaoServer
-    var idUsuario = req.body.idUsuarioServer;
-    usuarioModel.pontuacao(pontuacaoU, idUsuario)
-    .then(
-        function (resultado) {
-            res.json(resultado);
-        }
-    ).catch(
-        function (erro) {
-            console.log(erro);
-            console.log(
-                "\nHouve um erro ao realizar o cadastro! Erro: ",
-                erro.sqlMessage
-            );
-            res.status(500).json(erro.sqlMessage);
-        }
-    );
-}
 
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
@@ -114,6 +95,5 @@ function cadastrar(req, res) {
 
 module.exports = {
     autenticar,
-    pontuacao,
     cadastrar
 }

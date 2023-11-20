@@ -9,14 +9,6 @@ function autenticar(email, senha) {
     return database.executar(instrucao);
 }
 
-function pontuacao(pontuacaoU, idUsuario){
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function pontuacao(): ", pontuacaoU)
-    var instrucao = `
-        insert into Resultado (fkUsuario, fkQuizMusica, Nota) values ('${idUsuario}','1','${pontuacaoU}');
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-}
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
 function cadastrar(nome, email, senha, dataNasc, estado, cidade) {
     
@@ -34,6 +26,5 @@ function cadastrar(nome, email, senha, dataNasc, estado, cidade) {
 
 module.exports = {
     autenticar,
-    pontuacao,
     cadastrar
 };
