@@ -71,3 +71,11 @@ button:hover{
     transform: scale(1.1);
     transition: all 0.5s;
 }
+
+a{
+    color: white;
+    font-family: 'Roboto';
+    font-size: 18px;
+    text-decoration: underline white;
+    margin-top: 40px;
+}

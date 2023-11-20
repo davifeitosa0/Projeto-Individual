@@ -23,7 +23,7 @@ function autenticar(req, res) {
                         // aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
                             
                                     res.json({
-                                        id: resultadoAutenticar[0].idUsuario,
+                                        idUsuario: resultadoAutenticar[0].idUsuario,
                                         nome: resultadoAutenticar[0].nome,
                                         email: resultadoAutenticar[0].email,
                                         // senha: resultadoAutenticar[0].senha,
@@ -46,6 +46,26 @@ function autenticar(req, res) {
             );
     }
 
+}
+
+function pontuacao(req,res){
+    var pontuacaoU = req.body.pontuacaoServer
+    var idUsuario = req.body.idUsuarioServer;
+    usuarioModel.pontuacao(pontuacaoU, idUsuario)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao realizar o cadastro! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
 }
 
 function cadastrar(req, res) {
@@ -94,5 +114,6 @@ function cadastrar(req, res) {
 
 module.exports = {
     autenticar,
+    pontuacao,
     cadastrar
 }

@@ -1,7 +1,8 @@
 var pontuacao = 0;
 var respostas = [];
 var questoesCertas = [1, 1, 1, 1, 1, 1, 1, 1];
-var quest = 0
+var quest = 0;
+
 var proximaQuestao =[`  <p>Pergunta 2</p>
                         <audio controls="controls" loop="loop" src="assets/Questao2.mp4"></audio>
                         <div class="botoesResposta">
@@ -53,11 +54,12 @@ var proximaQuestao =[`  <p>Pergunta 2</p>
                         `<p>Pergunta 8</p>
                         <audio controls="controls" loop="loop"  src="assets/Questao8.mp4"></audio>
                         <div class="botoesResposta">
-                            <button onclick="respostaV(), cor()" id="q3">O Mundo É Nosso - Djonga</button>
-                            <button onclick="respostaE(), cor() " id="q1">Icarus - BK</button>
-                            <button onclick="respostaE(), cor() " id="q2">20 Ligações - Baco Exu do Blues</button>
-                            <button onclick="respostaE(), cor() " id="q4">Bala - Froid</button>
-                        </div>`,
+                            <button onclick="respostaV(), cor(), retorno() " id="q3">O Mundo É Nosso - Djonga</button>
+                            <button onclick="respostaE(), cor(), retorno() " id="q1">Icarus - BK</button>
+                            <button onclick="respostaE(), cor(), retorno() " id="q2">20 Ligações - Baco Exu do Blues</button>
+                            <button onclick="respostaE(), cor(), retorno() " id="q4">Bala - Froid</button>
+                        </div>`
+
                     ]
 
 
@@ -79,15 +81,14 @@ function botao(){
     q3.style.color = "black";
     q4.disabled = true;
     q4.style.color = "black";
-
-    setTimeout(
-            ()=>{
-                MudarQuestao.innerHTML = proximaQuestao[quest]; 
-                quest++;    
-                }
-            , 1000
-        ) 
+    if(quest != 7){
+        setTimeout(()=>{
+            MudarQuestao.innerHTML = proximaQuestao[quest]; 
+            quest++;    
+        }
+        , 1000) 
     }
+}
 
 
 function cor(){
@@ -102,3 +103,43 @@ function cor(){
     botao();
 }
 
+function retorno(){
+    var idUsuario = sessionStorage.ID_USUARIO;
+    setTimeout(()=>{
+        MudarQuestao.innerHTML = `  <p>Pontuação</p><br><br>
+                                    <p>${pontuacao}</p>  
+                                    
+                                    <a style="margin-top: 70px;" href="resultados.html"> Ver Resultados </a>    
+                                    <a href="recomendacao.html"> Recomendar música </a>    
+                                    <a href="index.html"> Voltar a Home </a>    
+                                `
+    }
+    , 1000) 
+    fetch("/usuarios/pontuacaoTeste", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          pontuacaoServer: pontuacao, 
+          idUsuarioServer: idUsuario
+        }),
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
+  
+          if (resposta.ok) {
+            console.log(resposta);
+
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
+  
+      return false;
+    
+   
+}
