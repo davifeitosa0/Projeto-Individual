@@ -24,6 +24,9 @@
                     </p>
                     <input type="password" id="senha_input" >
                 </label>
+                <p id="respErro" style="display: none;">
+
+                </p>
             </div>
             <div class="centralizar">
                 <button class="botaoAcao" onclick="entrar()">
@@ -47,14 +50,16 @@
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
 
-        if (emailVar == "" || senhaVar == "") {
-            // cardErro.style.display = "block"
-            // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            // finalizarAguardar();
+        if (emailVar == "" || emailVar.trim() == "") {
+            respErro.style.display = "block"
+            respErro.innerHTML = "Preencha o campo de email";
+            
             return false;
-        }
-        else {
-            // setInterval(sumirMensagem, 5000)
+        } else if (senhaVar == "" || senhaVar.trim() == "") {
+            respErro.style.display = "block"
+            respErro.innerHTML = "Preencha o campo de senha";
+
+            return false;
         }
 
         console.log("FORM LOGIN: ", emailVar);

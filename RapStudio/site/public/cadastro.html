@@ -31,6 +31,9 @@
                     </p>
                     <input type="password" id="inputSenha" placeholder="******************">
                 </label>
+                <p id="respErro">
+
+                </p>
             </div>
             <div class="centralizar">
                 <button class="botaoAcao" onclick="alterarTela()">
@@ -58,6 +61,24 @@
         nomeVar = inputNome.value
         emailVar = inputEmail.value
         senhaVar = inputSenha.value
+
+        if (emailVar.indexOf('@') < 0 || emailVar.length > 250) {
+            respErro.style.display = "block"
+            respErro.innerHTML = "Email inválido";
+
+            return false;
+        }
+        else if (senhaVar.indexOf('@') == -1 && senhaVar.indexOf('*') == -1 && senhaVar.indexOf('%') == -1 && senhaVar.indexOf('?') == -1 && senhaVar.indexOf('#') == -1 ) {
+            respErro.style.display = "block"
+            respErro.innerHTML = "Senha inválida, min. 1 caracter especial";
+
+            return false;
+        } else if (senhaVar.length < 8) {
+            respErro.style.display = "block"
+            respErro.innerHTML = "Min. de 8 caracteres";
+
+            return false;
+        }
 
         div_cadastro.innerHTML = ` 
         <p class="titulo">Cadastrar</p>
@@ -108,6 +129,9 @@
                     </p>
                     <input type="text" id="inputCidade" placeholder="Ex: Osasco">
                 </label>
+                <p id="respErro">
+
+                </p>
             </div>
             <div class="centralizar">
                 <button class="botaoAcao" onclick="cadastrar()">
@@ -131,22 +155,16 @@
     var dataNascVar = inputData.value;
     var cidadeVar = inputCidade.value
     if (
-      nomeVar == "" ||
-      emailVar == "" ||
-      senhaVar == "" ||
-      estadoVar == "" ||
-      cidadeVar == "" ||
-      dataNascVar == ""
+      estadoVar == "" || estadoVar.trim() == "" ||
+      cidadeVar == "" || cidadeVar.trim() == "" ||
+      dataNascVar == "" || dataNascVar.trim() == "" 
     ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+        respErro.style.display = "block";
+        respErro.innerHTML =
+            "Preencha todos os campos";
 
-      finalizarAguardar();
       return false;
-    } else {
-    //    setInterval(sumirMensagem, 5000);
-    }
+    } 
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -192,24 +210,5 @@
     return false;
   }
 
-//   function listar() {
-//     fetch("/empresas/listar", {
-//       method: "GET",
-//     })
-//       .then(function (resposta) {
-//         resposta.json().then((empresas) => {
-//           empresas.forEach((empresa) => {
-//             listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
-//           });
-//         });
-//       })
-//       .catch(function (resposta) {
-//         console.log(`#ERRO: ${resposta}`);
-//       });
-//   }
-
-//   function sumirMensagem() {
-//     cardErro.style.display = "none";
-//   }
 
 </script>
