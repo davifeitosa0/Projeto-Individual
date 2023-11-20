@@ -28,14 +28,16 @@ create table QuizMusica(
 );
 
 create table Resultado (
-	fkUsuario int,
-	fkQuizMusica int,
-	idResultado int,
-    primary key(fkUsuario, fkQuizMusica, idResultado),
-    Nota float,
+	fkUsuario int not null,
+	fkQuizMusica int not null,
+	idResultado int primary key auto_increment,
+    Nota int,
     constraint fkUsuario foreign key (fkUsuario) references Usuario(idUsuario),
     constraint fkQuizMusica foreign key (fkQuizMusica) references QuizMusica(idQuizMusica)
 );
+
+insert into QuizMusica values
+(null, 'Quiz Musical', 'Acerte a música que toca');
 
 create user 'userRapStudio'@'localhost' identified by 'Studio123';
 
