@@ -131,7 +131,10 @@ body{
     }
 }
 
-
+#localQuiz{
+    position: absolute;
+    margin-top: 100px;
+}
 
 .titulo{
     display: flex;
