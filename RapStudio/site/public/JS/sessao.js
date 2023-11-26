@@ -10,6 +10,7 @@ function validarSessao() {
         <li> Olá ${nome} </li>
             
         <li><i class="fa-solid fa-arrow-right-from-bracket" style="cursor: pointer;" onclick="limparSessao()"></i></li> `;
+        a_recomendacao.href = "recomendacao.html"
     }
 }
 

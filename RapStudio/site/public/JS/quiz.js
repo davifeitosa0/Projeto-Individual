@@ -107,7 +107,7 @@ function retorno(){
     var idUsuario = sessionStorage.ID_USUARIO;
     setTimeout(()=>{
         MudarQuestao.innerHTML = `  <p>Pontuação</p><br><br>
-                                    <p>${pontuacao}</p>  
+                                    <p>${pontuacao}/8</p>  
                                     
                                     <a style="margin-top: 70px;" href="resultados.html"> Ver Resultados </a>    
                                     <a href="recomendacao.html"> Recomendar música </a>    
