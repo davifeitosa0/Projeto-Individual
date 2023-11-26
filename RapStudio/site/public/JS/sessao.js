@@ -7,9 +7,9 @@ function validarSessao() {
 
     if (email != null && nome != null) {
         b_usuario.innerHTML = `
-        <li> Olá ${nome} </li>
-            
-        <li><i class="fa-solid fa-arrow-right-from-bracket" style="cursor: pointer;" onclick="limparSessao()"></i></li> `;
+        <a> Olá ${nome}</a>
+        `;
+        c_usuario.innerHTML = `<li><i class="fa-solid fa-arrow-right-from-bracket" style="cursor: pointer;" onclick="limparSessao()"></i></li> `
         a_recomendacao.href = "recomendacao.html"
     }
 }
@@ -31,10 +31,13 @@ function validarSessaoInteracao() {
 function limparSessao() {
     sessionStorage.clear();
     b_usuario.innerHTML = `
-    <li><a href="cadastro.html"> Cadastrar </a></li>
-    <div class="btn-entrar">
-        <li><a href="login.html"> Entrar </a></li>
-    </div> `;
+        <li><a href="cadastro.html"> Cadastrar </a></li>
+     `;
+    c_usuario.innerHTML = `
+        <div class="btn-entrar">
+            <li><a href="login.html"> Entrar </a></li>
+        </div>
+    `
 
     // window.location = "../login.html";
 }
