@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recomendações</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://kit.fontawesome.com/0d1baf2431.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/styleRecomendacao.css">
     <link rel="website icon" type="png" href="assets/RapStudioLogo.png">
     <script src="js/sessao.js"></script>
+    <script src="https://kit.fontawesome.com/0d1baf2431.js" crossorigin="anonymous"></script>
 </head>
-<body onload="validarSessao()">
+<body onload=" atualizarFeed(),validarSessao()">
     <div class="header">
-        <div class="container"> 
+        <div class="container">
             <a href="index.html">
                 <img src="assets/RapStudioImage.png" alt="">
-            </a>   
+            </a>
             <ul>
                 <li id="b_usuario"><a href="cadastro.html"> Cadastrar </a></li>
                 <span id="c_usuario" style="color: #ffffff;">
@@ -27,13 +27,124 @@
         </div> <!--container-->
     </div> <!--header-->
     <div class="container espacoTopo">
-        <div class="recomendeAqui">
-            <p>Digite o nome da sua música favorita!</p>
-            <input type="text" id="">
-        </div>
+        <p class="Titulo">Recomende Sua Música</p>
+        <form id="form_postagem" method="post">
+            <div class="recomendeAqui">
+                <div class="divInputs">
+                    <p>Nome da sua música favorita</p>
+                    <input type="text" name="titulo" placeholder="Música X" class="inputsMusica" id="titulo">
+                    <p style="margin-top: 20px;">Artista da sua música favorita</p>
+                    <input type="text" name="descricao" placeholder="Artista Y" class="inputsMusica" id="textarea_descricao">
+                </div>
+                <div class="btnplay">
+                    <i onclick="return publicar()" class="fa-regular fa-circle-play" style="color: #570000; font-size: 100px;"></i>
+                    <p onclick="return publicar()" style="font-size: 35px;">
+                        Enviar
+                    </p>
+                </div>
+            </div>
+        </form>
         <div class="listaRecomendações">
-
+            <p class="TituloRecomendacao">Recomendações dos Usuários</p>
+            <div id="feed_container" class="feed-container">
+                <!-- <div class="RecomendacaoUsuario">
+                    <p>Username Y</p>
+                    <p class="Musica"><span>Música X </span> - <span> Artista Y </span></p>
+                </div> -->
+            </div>
         </div>
     </div>
 </body>
 </html>
+<script>
+    function limparFormulario() {
+        document.getElementById("form_postagem").reset();
+    }
+
+    var idUsuario = sessionStorage.ID_USUARIO;
+     function publicar() {
+
+        var corpo = {
+            titulo: form_postagem.titulo.value,
+            descricao: form_postagem.descricao.value
+        }
+
+        fetch(`/avisos/publicar/${idUsuario}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(corpo)
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                // window.location = "recomendacao.html";
+                atualizarFeed()
+                limparFormulario();
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+        return false;
+
+    }
+
+    function atualizarFeed() {
+        fetch("/avisos/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feed = document.getElementById("feed_container");
+                    feed.innerHTML = "";
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        if(publicacao.idUsuario == idUsuario){
+                            form_postagem.style.display = 'none'
+                        }
+
+                        // criando e manipulando elementos do HTML via JavaScript
+                        var RecomendacaoUsuario = document.createElement("div");
+                        var pUser = document.createElement("p");
+                        var pMusc = document.createElement("p");
+
+
+                        pUser.innerHTML =  publicacao.nome;
+                        pMusc.innerHTML =  publicacao.titulo + " - " + publicacao.descricao;
+
+                        RecomendacaoUsuario.className = "RecomendacaoUsuario";
+                        pUser.className = "Musica";
+
+
+
+                        RecomendacaoUsuario.appendChild(pUser);
+                        RecomendacaoUsuario.appendChild(pMusc);
+                        feed.appendChild(RecomendacaoUsuario);
+                    }
+
+                    // finalizarAguardar();
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+            // finalizarAguardar();
+        });
+    }
+</script>

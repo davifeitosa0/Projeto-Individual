@@ -9,7 +9,7 @@ function validarSessao() {
         b_usuario.innerHTML = `
         <a> Olá ${nome}</a>
         `;
-        c_usuario.innerHTML = `<li><i class="fa-solid fa-arrow-right-from-bracket" style="cursor: pointer;" onclick="limparSessao()"></i></li> `
+        c_usuario.innerHTML = `<li><a href="index.html"><i class="fa-solid fa-arrow-right-from-bracket" style="cursor: pointer;" onclick="limparSessao()"></i></a></li> `
         a_recomendacao.href = "recomendacao.html"
     }
 }
