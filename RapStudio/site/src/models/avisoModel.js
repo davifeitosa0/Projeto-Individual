@@ -9,9 +9,7 @@ function listar() {
             a.descricao,
             a.fk_usuario,
             u.idUsuario,
-            u.nome,
-            u.email,
-            u.senha
+            u.nome
         FROM Recomendacao a
             INNER JOIN usuario u
                 ON a.fk_usuario = u.idUsuario;
@@ -29,8 +27,7 @@ function pesquisarDescricao(texto) {
             a.descricao,
             a.fk_usuario,
             u.idUsuario,
-            u.nome,
-            u.email
+            u.nome
         FROM Recomendacao a
             INNER JOIN usuario u
                 ON a.fk_usuario = u.idUsuario

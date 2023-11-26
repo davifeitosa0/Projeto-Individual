@@ -14,6 +14,20 @@ function validarSessao() {
     }
 }
 
+function validarSessaoRecomendacao() {
+    var email = sessionStorage.EMAIL_USUARIO;
+    var nome = sessionStorage.NOME_USUARIO;
+
+    var b_usuario = document.getElementById("b_usuario");
+
+    if (email != null && nome != null) {
+        b_usuario.innerHTML = `
+        <a> Olá ${nome}</a>
+        `;
+        c_usuario.innerHTML = `<li><a href="index.html"><i class="fa-solid fa-arrow-right-from-bracket" style="cursor: pointer;" onclick="limparSessao()"></i></a></li> `
+    }
+}
+
 function validarSessaoInteracao() {
     var email = sessionStorage.EMAIL_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
