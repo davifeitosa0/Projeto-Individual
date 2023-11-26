@@ -27,6 +27,7 @@
                 <p id="respErro" style="display: none;">
 
                 </p>
+                <div class="custom-loader" id="loading"></div>
             </div>
             <div class="centralizar">
                 <button class="botaoAcao" onclick="entrar()">
@@ -64,7 +65,9 @@
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
-
+        respErro.style.display = "none"
+        loading.style.display = "block"
+        
         fetch("/usuarios/autenticar", {
             method: "POST",
             headers: {
@@ -99,18 +102,17 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
+                    loading.style.display = "none"
                 });
             }
 
         }).catch(function (erro) {
             console.log(erro);
+            loading.style.display = "none"
         })
 
         return false;
     }
 
-    function sumirMensagem() {
-        cardErro.style.display = "none"
-    }
+
 </script>

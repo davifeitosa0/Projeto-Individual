@@ -132,6 +132,7 @@
                 <p id="respErro">
 
                 </p>
+                <div class="custom-loader" id="loading"></div>
             </div>
             <div class="centralizar">
                 <button class="botaoAcao" onclick="cadastrar()">
@@ -164,6 +165,8 @@
 
       return false;
     } 
+    respErro.style.display = "none"
+    loading.style.display = "block"
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -193,10 +196,12 @@
         
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
+          loading.style.display = "none"
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
+        loading.style.display = "none"
       });
 
     return false;
