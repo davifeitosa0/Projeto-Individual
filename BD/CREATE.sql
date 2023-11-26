@@ -16,7 +16,8 @@ select * from usuario;
 
 CREATE TABLE Recomendacao (
 	idRecomendacao int primary key auto_increment,
-	nomeMusica varchar(150),
+	titulo varchar(150),
+	Descricao varchar(150),
 	fk_usuario int,
 	constraint idUsuario foreign key (fk_usuario) references usuario(idUsuario)
 );
