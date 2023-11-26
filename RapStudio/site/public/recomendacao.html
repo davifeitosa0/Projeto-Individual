@@ -1,11 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Recomendações</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/0d1baf2431.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/styleRecomendacao.css">
+    <link rel="website icon" type="png" href="assets/RapStudioLogo.png">
+    <script src="js/sessao.js"></script>
 </head>
-<body>
-    
+<body onload="validarSessao()">
+    <div class="header">
+        <div class="container"> 
+            <a href="index.html">
+                <img src="assets/RapStudioImage.png" alt="">
+            </a>   
+            <ul>
+                <li id="b_usuario"><a href="cadastro.html"> Cadastrar </a></li>
+                <span id="c_usuario" style="color: #ffffff;">
+                    <div  class="btn-entrar">
+                        <li><a href="login.html"> Entrar </a></li>
+                    </div>
+                </span>
+            </ul>
+        </div> <!--container-->
+    </div> <!--header-->
+    <div class="container espacoTopo">
+        <div class="recomendeAqui">
+            <p>Digite o nome da sua música favorita!</p>
+            <input type="text" id="">
+        </div>
+        <div class="listaRecomendações">
+
+        </div>
+    </div>
 </body>
 </html>
