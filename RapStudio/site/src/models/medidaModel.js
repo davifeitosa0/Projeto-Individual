@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(idAquario, limite_linhas) {
+function buscarUltimasMedidas() {
 
     instrucaoSql = ''
 
@@ -14,14 +14,33 @@ function buscarUltimasMedidas(idAquario, limite_linhas) {
                     where fk_aquario = ${idAquario}
                     order by id desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select 
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,
-                        momento,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
-                    from medida
-                    where fk_aquario = ${idAquario}
-                    order by id desc limit ${limite_linhas}`;
+        instrucaoSql = `SELECT 
+        ((SELECT 
+                COUNT(*)
+            FROM
+                usuario
+            WHERE
+                YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) <= 18) * 100) / COUNT(*) AS Jovem,
+        ((SELECT 
+                COUNT(*)
+            FROM
+                usuario
+            WHERE
+                YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) > 18  and YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) <= 29) * 100) / COUNT(*) AS JovemAdulto,
+                ((SELECT 
+                COUNT(*)
+            FROM
+                usuario
+            WHERE
+                YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) > 29  and YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) <= 59) * 100) / COUNT(*) AS Adulto,
+                ((SELECT 
+                COUNT(*)
+            FROM
+                usuario
+            WHERE
+                YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) >= 60 ) * 100) / COUNT(*) AS Idoso
+    FROM
+        usuario;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

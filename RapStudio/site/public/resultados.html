@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/styleResultados.css">
+    <link rel="website icon" type="png" href="assets/RapStudioLogo.png">
+    <script src="js/sessao.js"></script>
+    <script src="https://kit.fontawesome.com/0d1baf2431.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="conteudos">
+            <div id="aqui" class="icones">
+                <a href="index.html">
+                    <i class="fa-solid fa-house"></i>
+                    <p>Home</p>
+                </a>
+            </div>
+            <div class="icones">
+                <a href="recomendacao.html">
+                    <i class="fa-solid fa-music"></i>
+                    <p>Playlist</p>
+                </a>
+            </div>
+            <div class="icones">
+                <a onclick="VoltarHome()" href="../index.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <p>Sair</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="graficosDash doisCanvas">
+            <div class="CanvasDash primeiroCanva">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="CanvasDash segundoCanva">
+
+            </div>
+        </div>
+        <div class="graficosDash liderScore">
+            <div class="topResultados">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+
+    // const ctx = document.getElementById('myChart');
+    let proximaAtualizacao;
+    Chart.defaults.color = '#fff';
+    window.onload = obterDadosGrafico();
+    // new Chart(ctx, {
+    //     type: 'doughnut',
+    //     data: {
+    //         labels: [
+    //             '0-18 Jovens',
+    //             '19-29 Jovens Adultos',
+    //             '30-59 Adultos',
+    //             '60+ Idosos'
+    //         ],
+    //         datasets: [{
+    //             borderWidth: 0.5,
+    //             label: 'Idade Usuários',
+    //             data: [100, 100, 100, 100],
+    //             backgroundColor: [
+    //                 '#69140E',
+    //                 '#FFF',
+    //                 '#66101F',
+    //                 '#2E3532',
+    //             ],
+    //             hoverOffset: 4
+    //         }]
+    //     },
+    //     options: {
+    //         plugins: {
+    //             legend: {
+    //                 labels: {
+    //                     font: {
+    //                         size: 18
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
+
+
+    function obterDadosGrafico() {
+
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
+
+        fetch(`/medidas/ultimas`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico(resposta);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+    function plotarGrafico(resposta) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: [
+                '0-18 Jovens',
+                '19-29 Jovens Adultos',
+                '30-59 Adultos',
+                '60+ Idosos'
+            ],
+            datasets: [{
+                borderWidth: 0.5,
+                label: 'Idade Usuários',
+                data: [],
+                backgroundColor: [
+                    '#69140E',
+                    '#FFF',
+                    '#66101F',
+                    '#2E3532',
+                ],
+                hoverOffset: 4
+            }],
+            options: {
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 18
+                            }
+                        }
+                    }
+                }
+
+            }
+        };
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        var registro = resposta[0];
+        dados.datasets[0].data.push(registro.Jovem);
+        dados.datasets[0].data.push(registro.JovemAdulto);
+        dados.datasets[0].data.push(registro.Adulto);
+        dados.datasets[0].data.push(registro.Idoso);
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'doughnut',
+            data: dados,
+        };
+
+        // Adicionando gráfico criado em div na tela
+        let myChart = new Chart(
+            document.getElementById(`myChart`),
+            config
+        );
+    }
+</script>

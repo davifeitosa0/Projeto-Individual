@@ -4,9 +4,9 @@ function listar() {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
         SELECT 
-            a.idRecomendacao AS idAviso,
-            a.titulo,
-            a.descricao,
+            a.idRecomendacao,
+            a.Artista,
+            a.Musica,
             a.fk_usuario,
             u.idUsuario,
             u.nome
@@ -18,76 +18,17 @@ function listar() {
     return database.executar(instrucao);
 }
 
-function pesquisarDescricao(texto) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function pesquisarDescricao()");
+function publicar(Artista, Musica, idUsuario) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", Artista, Musica, idUsuario);
     var instrucao = `
-        SELECT 
-            a.idRecomendacao AS idAviso,
-            a.titulo,
-            a.descricao,
-            a.fk_usuario,
-            u.idUsuario,
-            u.nome
-        FROM Recomendacao a
-            INNER JOIN usuario u
-                ON a.fk_usuario = u.idUsuario
-        WHERE a.descricao LIKE '${texto}';
+        INSERT INTO Recomendacao (Artista, Musica, fk_usuario) VALUES ('${Artista}', '${Musica}', ${idUsuario});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
-function listarPorUsuario(idUsuario) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarPorUsuario()");
-    var instrucao = `
-        SELECT 
-            a.idRecomendacao as idAviso,
-            a.titulo,
-            a.descricao,
-            a.fk_usuario,
-            u.nome,
-            u.email
-        FROM Recomendacao a
-            INNER JOIN usuario u
-                ON a.fk_usuario = u.idUsuario
-        WHERE u.idUsuario = ${idUsuario};
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-}
-
-function publicar(titulo, descricao, idUsuario) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", titulo, descricao, idUsuario);
-    var instrucao = `
-        INSERT INTO Recomendacao (titulo, descricao, fk_usuario) VALUES ('${titulo}', '${descricao}', ${idUsuario});
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-}
-
-// function editar(novaDescricao, idAviso) {
-//     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ", novaDescricao, idAviso);
-//     var instrucao = `
-//         UPDATE aviso SET descricao = '${novaDescricao}' WHERE id = ${idAviso};
-//     `;
-//     console.log("Executando a instrução SQL: \n" + instrucao);
-//     return database.executar(instrucao);
-// }
-
-// function deletar(idAviso) {
-//     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idAviso);
-//     var instrucao = `
-//         DELETE FROM aviso WHERE id = ${idAviso};
-//     `;
-//     console.log("Executando a instrução SQL: \n" + instrucao);
-//     return database.executar(instrucao);
-// }
 
 module.exports = {
     listar,
-    listarPorUsuario,
-    pesquisarDescricao,
     publicar
-    // editar,
-    // deletar
 }
