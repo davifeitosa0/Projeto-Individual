@@ -170,6 +170,15 @@ function plotarSegundoGrafico(resposta) {
                         display: false
                     }
                 }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            size: 19
+                        }
+                    }
+                }
             }
         }
     };
