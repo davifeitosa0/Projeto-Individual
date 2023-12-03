@@ -62,8 +62,18 @@ function listarUsuarios(){
     `;
     return database.executar(instrucaoSql);
 }
+
+function listarPontuacao(){
+    instrucaoSql = '';
+
+    instrucaoSql = `
+        select count(*) as zeroDois, (select count(*) from Resultado where nota >= 3 and nota <=4) as tresQuatro, (select count(*) from Resultado where nota >= 5 and nota <= 6) as cincoSeis, (select count(*) from Resultado where nota >= 7) as seteOito from Resultado where nota <= 2;
+    `;
+    return database.executar(instrucaoSql);
+}
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
-    listarUsuarios
+    listarUsuarios,
+    listarPontuacao
 }

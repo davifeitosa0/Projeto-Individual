@@ -15,4 +15,8 @@ router.get("/listar", function (req, res) {
     medidaController.listarUsuarios(req, res);
 })
 
+router.get("/listarPontos", function (req, res) {
+    medidaController.listarPontuacao(req, res);
+})
+
 module.exports = router;

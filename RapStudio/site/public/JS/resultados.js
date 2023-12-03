@@ -27,9 +27,6 @@ function plotarGrafico(resposta) {
 
     console.log('iniciando plotagem do gráfico...');
 
-    // Criando estrutura para plotar gráfico - labels
-    let labels = [];
-
     // Criando estrutura para plotar gráfico - dados
     let dados = {
         labels: [
@@ -96,6 +93,92 @@ function plotarGrafico(resposta) {
 
 
 
+function obterDadosSegundoGrafico() {
+    if (proximaAtualizacao != undefined) {
+        clearTimeout(proximaAtualizacao);
+    }
+
+    fetch(`/medidas/listarPontos`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+
+                plotarSegundoGrafico(resposta);
+
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
+
+
+function plotarSegundoGrafico(resposta) {
+
+    console.log('iniciando plotagem do gráfico...');
+
+    // Criando estrutura para plotar gráfico - dados
+    let dados = {
+        labels: ["0-2", "3-4", "5-6", "7-8"],
+        datasets: [{
+            label: "Quantidade de Notas Quiz",
+            backgroundColor: "rgba(94,33,41,0.2)",
+            borderColor: "rgba(94,33,41,1)",
+            borderWidth: 2,
+            hoverBackgroundColor: "rgba(94,33,41,0.4)",
+            hoverBorderColor: "rgba(94,33,41,1)",
+            data: []
+        }]
+    };
+    console.log('----------------------------------------------')
+    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+    console.log(resposta)
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    var registro = resposta[0];
+    dados.datasets[0].data.push(registro.zeroDois);
+    dados.datasets[0].data.push(registro.tresQuatro);
+    dados.datasets[0].data.push(registro.cincoSeis);
+    dados.datasets[0].data.push(registro.seteOito);
+
+    console.log('----------------------------------------------')
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Dados:')
+    console.log(dados.datasets)
+    console.log('----------------------------------------------')
+
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+        type: 'bar',
+        data: dados,
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    stacked: true,
+                    grid: {
+                        display: true,
+                        color: "rgba(94,33,41,0.1)"
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    };
+    // Adicionando gráfico criado em div na tela
+    let chart = new Chart(
+        document.getElementById(`chart`),
+        config
+    );
+}
 
 
 
