@@ -37,6 +37,37 @@ create table Resultado (
     constraint fkQuizMusica foreign key (fkQuizMusica) references QuizMusica(idQuizMusica)
 );
 
+create view vw_idades
+as
+SELECT 
+        ((SELECT 
+                COUNT(*)
+            FROM
+                usuario
+            WHERE
+                YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) <= 18) * 100) / COUNT(*) AS Jovem,
+        ((SELECT 
+                COUNT(*)
+            FROM
+                usuario
+            WHERE
+                YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) > 18  and YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) <= 29) * 100) / COUNT(*) AS JovemAdulto,
+                ((SELECT 
+                COUNT(*)
+            FROM
+                usuario
+            WHERE
+                YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) > 29  and YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) <= 59) * 100) / COUNT(*) AS Adulto,
+                ((SELECT 
+                COUNT(*)
+            FROM
+                usuario
+            WHERE
+                YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) >= 60 ) * 100) / COUNT(*) AS Idoso
+    FROM
+        usuario;
+        
+
 insert into QuizMusica values
 (null, 'Quiz Musical', 'Acerte a música que toca');
 
