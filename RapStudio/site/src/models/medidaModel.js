@@ -14,33 +14,7 @@ function buscarUltimasMedidas() {
                     where fk_aquario = ${idAquario}
                     order by id desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT 
-        ((SELECT 
-                COUNT(*)
-            FROM
-                usuario
-            WHERE
-                YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) <= 18) * 100) / COUNT(*) AS Jovem,
-        ((SELECT 
-                COUNT(*)
-            FROM
-                usuario
-            WHERE
-                YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) > 18  and YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) <= 29) * 100) / COUNT(*) AS JovemAdulto,
-                ((SELECT 
-                COUNT(*)
-            FROM
-                usuario
-            WHERE
-                YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) > 29  and YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) <= 59) * 100) / COUNT(*) AS Adulto,
-                ((SELECT 
-                COUNT(*)
-            FROM
-                usuario
-            WHERE
-                YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(dtNasc))) >= 60 ) * 100) / COUNT(*) AS Idoso
-    FROM
-        usuario;`;
+        instrucaoSql = `select * from vw_idades;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -80,8 +54,16 @@ function buscarMedidasEmTempoReal(idAquario) {
     return database.executar(instrucaoSql);
 }
 
+function listarUsuarios(){
+    instrucaoSql = '';
 
+    instrucaoSql = `
+        select u.nome as nome, nota as pontuacao from usuario u join resultado on fkUsuario = idUsuario order by nota desc limit 5;
+    `;
+    return database.executar(instrucaoSql);
+}
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    listarUsuarios
 }

@@ -126,8 +126,8 @@ body{
         z-index: 1;
         font-family: 'MARSNEVENEKSK';
         font-size: 150px;
-        color: #740000;
-        text-shadow: 1.5px 1.5px 1.5px #ffffff;
+        color: #ffffff;
+        text-shadow: 10px 10px 10px #000000;
     }
 }
 
